@@ -15,11 +15,12 @@ import Layout from '../layouts/Layout.astro';
     <section class="hero" id="home">
       <div>
         <p class="eyebrow">Graduate Student in Computer Science</p>
-        <h1>Tsai Shou-Wei</h1>
+        <h1 class="site-title">Shou-Wei Tsai (蔡劭威)</h1>
         <p class="lead">
           Graduated with a background in Statistics and have spent the past years strengthening my skills in
-          data analysis, machine learning, and applied computational research. My interests lie in combining
-          statistical reasoning with software and hardware understanding to solve real-world problems.
+          data analysis, machine learning, sensing peripheral devices (FPGA/Raspberry Pi) and applied
+          computational research. My interests lie in combining statistical reasoning with software and hardware
+          understanding to solve real-world problems.
         </p>
         <div class="hero-actions">
           <a href="#projects">Selected Projects</a>
@@ -31,17 +32,9 @@ import Layout from '../layouts/Layout.astro';
         <div class="profile-photo-wrap">
           <img
             class="profile-photo"
-            src="https://avatars.githubusercontent.com/u/73927902?s=400&v=4"
+            src="/your-photo.jpg"
             alt="Tsai Shou-Wei"
           />
-        </div>
-        <div class="hero-card">
-          <p class="card-label">Research focus</p>
-          <ul>
-            <li>Big data analysis</li>
-            <li>Probability & mathematical statistics</li>
-            <li>Machine learning and signal processing</li>
-          </ul>
         </div>
       </div>
     </section>
@@ -49,7 +42,7 @@ import Layout from '../layouts/Layout.astro';
     <section class="section" id="education">
       <div class="section-header">
         <p class="eyebrow">Education</p>
-        <h2>Academic background</h2>
+        <h2>Academic Background</h2>
       </div>
       <div class="education-grid">
         <article class="education-card">
@@ -73,23 +66,25 @@ import Layout from '../layouts/Layout.astro';
     <section class="section" id="experience">
       <div class="section-header">
         <p class="eyebrow">Research experience</p>
-        <h2>Areas of study</h2>
+        <h2>Areas of Study</h2>
       </div>
       <div class="experience-layout">
         <div>
           <p class="experience-text">
-            My academic path spans statistics, signal processing, machine learning, and hardware-oriented computing.
-            I have worked with point cloud registration, probabilistic modeling, denoising strategies, and large-scale
+            My academic path spans statistics, statistical signal processing, machine learning, and hardware-oriented
+            computing. I have worked with point clouds, probabilistic methods, denoising strategies, and large-scale
             data analysis, while also exploring embedded systems and digital design.
           </p>
         </div>
-        <div class="tag-list">
-          <span>Point Cloud Registration</span>
-          <span>Big Data Analysis</span>
-          <span>Probability</span>
-          <span>Mathematical Statistics</span>
-          <span>Machine Learning</span>
-          <span>Statistical Signal Processing</span>
+        <div class="tag-panel">
+          <p class="tag-title">Research Focus</p>
+          <div class="tag-list tag-list-inline">
+            <span>Big Data Analysis</span>
+            <span>Probability & Mathematical Statistics</span>
+            <span>Machine Learning and Deep Learning</span>
+            <span>Freezing of Gate Detection</span>
+            <span>Signal Processing</span>
+          </div>
         </div>
       </div>
     </section>
@@ -97,13 +92,13 @@ import Layout from '../layouts/Layout.astro';
     <section class="section" id="projects">
       <div class="section-header">
         <p class="eyebrow">Projects</p>
-        <h2>Selected work</h2>
+        <h2>Selected Work</h2>
       </div>
       <div class="project-grid">
         <article class="project-card">
           <div class="project-top">
             <p class="project-meta">Research · 3D vision</p>
-            <span class="project-pill">Point clouds</span>
+            <span class="project-pill">Point Clouds</span>
           </div>
           <h3>3D Point Cloud Registration on Forest Datasets</h3>
           <p>
@@ -114,7 +109,7 @@ import Layout from '../layouts/Layout.astro';
         <article class="project-card">
           <div class="project-top">
             <p class="project-meta">Statistics · Modeling</p>
-            <span class="project-pill">Probabilistic methods</span>
+            <span class="project-pill">Probabilistic Methods</span>
           </div>
           <h3>Markov Chain Based Outlier Denoising</h3>
           <p>
@@ -143,7 +138,7 @@ import Layout from '../layouts/Layout.astro';
         </article>
         <article class="project-card">
           <div class="project-top">
-            <p class="project-meta">Digital design</p>
+            <p class="project-meta">Digital Design</p>
             <span class="project-pill">FPGA</span>
           </div>
           <h3>FPGA / Verilog / VHDL Coursework</h3>
@@ -167,16 +162,21 @@ import Layout from '../layouts/Layout.astro';
     <section class="section contact-section" id="contact">
       <div class="section-header">
         <p class="eyebrow">Contact</p>
-        <h2>Contact information</h2>
+        <h2>Contact Information</h2>
+      </div>
+      <div class="contact-meta-block">
+        <p><strong>Hobbies:</strong> Bodybuilding, Basketball, Language learning</p>
+        <p><strong>Locations:</strong> Hsinchu, Taipei, Tainan, Taiwan (R.O.C)</p>
       </div>
       <p>
-        I am interested in research collaboration, applied data projects, and opportunities related to AI, statistics,
+        Welcome for research collaboration, applied data projects, and opportunities related to AI, statistics,
         and intelligent systems.
       </p>
       <div class="contact-links">
         <a href="mailto:h24101329@gs.ncku.edu.tw">h24101329@gs.ncku.edu.tw</a>
         <a href="https://github.com/mrdrano" target="_blank" rel="noreferrer">GitHub</a>
         <a href="https://www.linkedin.com/in/%E5%8A%AD%E5%A8%81-%E8%94%A1-58b752258/" target="_blank" rel="noreferrer">LinkedIn</a>
+        <a href="https://hackmd.io/@ddrano?utm_source=overview&utm_medium=team-switcher" target="_blank" rel="noreferrer">HackMD</a>
       </div>
     </section>
   </main>
@@ -207,7 +207,7 @@ import Layout from '../layouts/Layout.astro';
   .page-shell {
     width: min(1120px, calc(100% - 48px));
     margin: 0 auto;
-    padding: 96px 0 64px;
+    padding: 72px 0 64px;
   }
 
   .top-nav {
@@ -232,8 +232,8 @@ import Layout from '../layouts/Layout.astro';
     display: grid;
     grid-template-columns: 1.5fr 0.9fr;
     gap: 32px;
-    align-items: center;
-    padding: 48px 0;
+    align-items: start;
+    padding: 24px 0 36px;
   }
 
   .eyebrow {
@@ -241,7 +241,7 @@ import Layout from '../layouts/Layout.astro';
     letter-spacing: 0.18em;
     font-size: 0.76rem;
     color: var(--accent);
-    margin: 0 0 12px;
+    margin: 0 0 8px;
   }
 
   h1,
@@ -252,9 +252,13 @@ import Layout from '../layouts/Layout.astro';
   }
 
   h1 {
-    font-size: clamp(3rem, 4vw, 4.5rem);
+    font-size: clamp(2.6rem, 3.4vw, 3.8rem);
     line-height: 1;
-    margin-bottom: 16px;
+    margin-bottom: 12px;
+  }
+
+  .site-title {
+    font-size: clamp(2.1rem, 2.8vw, 3rem);
   }
 
   .lead {
@@ -268,7 +272,11 @@ import Layout from '../layouts/Layout.astro';
     display: flex;
     flex-wrap: wrap;
     gap: 12px;
-    margin-top: 24px;
+    margin-top: 18px;
+  }
+
+  .hero > div:first-child {
+    align-self: start;
   }
 
   .hero-actions a,
@@ -310,6 +318,7 @@ import Layout from '../layouts/Layout.astro';
   .hero-visual {
     display: grid;
     gap: 18px;
+    align-content: start;
   }
 
   .profile-photo-wrap {
@@ -317,6 +326,8 @@ import Layout from '../layouts/Layout.astro';
     border-radius: 18px;
     border: 1px solid var(--border);
     background: var(--surface-2);
+    max-width: 360px;
+    margin-left: auto;
   }
 
   .profile-photo {
@@ -324,6 +335,8 @@ import Layout from '../layouts/Layout.astro';
     width: 100%;
     aspect-ratio: 1 / 1;
     object-fit: cover;
+    max-width: 320px;
+    margin: 0 auto;
   }
 
   .hero-card {
@@ -406,6 +419,25 @@ import Layout from '../layouts/Layout.astro';
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
+  }
+
+  .tag-panel {
+    display: grid;
+    gap: 10px;
+    align-content: start;
+  }
+
+  .tag-title {
+    color: var(--accent);
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .tag-list-inline {
+    align-content: flex-start;
+    justify-content: flex-start;
   }
 
   .tag-list span {
@@ -493,6 +525,17 @@ import Layout from '../layouts/Layout.astro';
     padding: 28px;
   }
 
+  .contact-meta-block {
+    display: grid;
+    gap: 6px;
+    margin-bottom: 18px;
+  }
+
+  .contact-meta-block p {
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
   .contact-section > p {
     color: var(--muted);
     line-height: 1.7;
@@ -516,7 +559,8 @@ import Layout from '../layouts/Layout.astro';
     .experience-layout,
     .education-grid,
     .project-grid,
-    .repo-grid {
+    .repo-grid,
+    .course-layout {
       grid-template-columns: 1fr;
     }
   }
