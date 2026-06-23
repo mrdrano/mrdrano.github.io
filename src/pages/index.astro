@@ -4,13 +4,7 @@ import Layout from '../layouts/Layout.astro';
 
 <Layout>
   <main class="page-shell">
-    <nav class="top-nav">
-      <a href="#home">Home</a>
-      <a href="#education">Education</a>
-      <a href="#experience">Experience</a>
-      <a href="#projects">Projects</a>
-      <a href="#contact">Contact</a>
-    </nav>
+    <!-- Top navigation removed per user request (redundant with in-page tabs) -->
 
     <section class="hero" id="home">
       <div>
@@ -24,8 +18,8 @@ import Layout from '../layouts/Layout.astro';
         </p>
         <div class="hero-actions">
           <a href="#projects">Selected Projects</a>
-          <a href="#contact" class="secondary">Contact</a>
           <a href="#education" class="secondary resume-btn">Resume / CV</a>
+          <a href="#contact" class="secondary contact-btn">Contact</a>
         </div>
       </div>
       <div class="hero-visual">
@@ -182,16 +176,78 @@ import Layout from '../layouts/Layout.astro';
   </main>
 </Layout>
 
+<div class="edge-decor" aria-hidden="true">
+  <span class="h-line"></span>
+  <span class="v-line left"></span>
+  <span class="v-line right"></span>
+  <span class="dot" style="left:14%; top:28px"></span>
+  <span class="dot" style="left:34%; top:24px"></span>
+  <span class="dot" style="left:64%; top:30px"></span>
+  <span class="corner top-left"></span>
+  <span class="corner top-right"></span>
+  <span class="label-badge" style="left:8%; top:68px">Areas of study</span>
+  <span class="label-badge right" style="right:8%; top:68px">Selected projects</span>
+  <div class="floating-panel" style="right:6%; top:120px">
+    <div class="row"><span class="dot-mini"></span><div>Recent: Graph ML paper</div></div>
+    <div class="row"><span class="dot-mini"></span><div>Tooling: Compiler experiments</div></div>
+    <div class="row"><span class="dot-mini"></span><div>Location: Taipei</div></div>
+  </div>
+  <svg class="svg-pattern" width="84" height="48" viewBox="0 0 84 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <pattern id="p" width="6" height="6" patternUnits="userSpaceOnUse">
+        <rect width="1" height="1" fill="rgba(16,24,40,0.08)"></rect>
+      </pattern>
+    </defs>
+    <rect width="84" height="48" fill="url(#p)" />
+  </svg>
+</div>
+
+<div class="crab" aria-hidden="true">🦀</div>
+
+<script>
+  (function() {
+    const crab = document.querySelector('.crab');
+    if (!crab) return;
+
+    // When pointer enters the crab, pause its walking animation; when it leaves, resume.
+    function pause() {
+      crab.style.animationPlayState = 'paused';
+      crab.classList.add('paused-by-pointer');
+    }
+
+    function resume() {
+      crab.style.animationPlayState = '';
+      crab.classList.remove('paused-by-pointer');
+    }
+
+    // pointerenter/pointerleave cover mouse and stylus; use touch events for mobile
+    crab.addEventListener('pointerenter', pause);
+    crab.addEventListener('pointerleave', resume);
+
+    crab.addEventListener('touchstart', function(e) {
+      pause();
+      // resume after finger lifts
+      const onEnd = () => { resume(); window.removeEventListener('touchend', onEnd); };
+      window.addEventListener('touchend', onEnd, {passive:true});
+    }, {passive:true});
+
+    // also allow clicking the crab to toggle pause/resume for fun
+    crab.addEventListener('click', function() {
+      if (crab.classList.contains('paused-by-pointer')) resume(); else pause();
+    });
+  })();
+</script>
+
 <style>
   :root {
-    --bg: #0f172a;
-    --surface: #111c36;
-    --surface-2: #0b1225;
-    --text: #e5eefc;
-    --muted: #9fb3d1;
-    --accent: #7dd3fc;
-    --accent-2: #c084fc;
-    --border: #203152;
+    --bg: #f8fafc;
+    --surface: #ffffff;
+    --surface-2: #f1f5f9;
+    --text: #0b1220;
+    --muted: #64748b;
+    --accent: #2563eb;
+    --accent-2: #7c3aed;
+    --border: #e6edf3;
   }
 
   html {
@@ -199,9 +255,8 @@ import Layout from '../layouts/Layout.astro';
   }
 
   body {
-    background:
-      radial-gradient(circle at top, rgba(125, 211, 252, 0.08), transparent 18%),
-      var(--bg);
+    background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+    color: var(--text);
   }
 
   .page-shell {
@@ -303,6 +358,40 @@ import Layout from '../layouts/Layout.astro';
 
   .resume-btn {
     background: transparent;
+  }
+
+  /* Colored action buttons */
+  .hero-actions a.resume-btn {
+    background: linear-gradient(90deg, #10b981, #059669); /* green */
+    color: #061014;
+    border: none;
+  }
+
+  .hero-actions a.contact-btn {
+    background: linear-gradient(90deg, #fbbf24, #f59e0b); /* yellow */
+    color: #061014;
+    border: none;
+  }
+
+  /* Subtle border accents */
+  .hero-actions a {
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.03);
+  }
+
+  .hero-actions a.secondary {
+    box-shadow: none; /* secondary already has its own border */
+  }
+
+  .hero-visual .profile-photo-wrap {
+    border-radius: 20px;
+    border: 1px solid rgba(125,211,252,0.06);
+    box-shadow: 0 8px 20px rgba(2,6,23,0.45);
+  }
+
+  .hero-card {
+    padding: 24px;
+    border: 1px solid rgba(255,255,255,0.03);
+    box-shadow: 0 6px 18px rgba(2,6,23,0.45);
   }
 
   .hero-card,
@@ -553,6 +642,232 @@ import Layout from '../layouts/Layout.astro';
     border: 1px solid var(--border);
     border-radius: 999px;
   }
+
+  /* Dynamic accents and hover effects */
+  @keyframes floatY {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+    100% { transform: translateY(0); }
+  }
+
+  .profile-photo-wrap:hover {
+    transform: translateY(-6px) scale(1.01);
+    transition: transform 300ms ease, box-shadow 300ms ease;
+    box-shadow: 0 14px 30px rgba(16,24,40,0.12);
+  }
+
+  .profile-photo-wrap {
+    transition: transform 350ms ease, box-shadow 350ms ease;
+  }
+
+  .hero-actions a:hover {
+    transform: translateY(-4px) scale(1.02);
+    transition: transform 180ms ease, box-shadow 180ms ease;
+    box-shadow: 0 10px 20px rgba(16,24,40,0.08);
+  }
+
+  .project-card:hover {
+    transform: translateY(-8px);
+    transition: transform 240ms ease, box-shadow 240ms ease;
+    box-shadow: 0 18px 36px rgba(16,24,40,0.06);
+  }
+
+  .tag-list span:hover {
+    transform: translateY(-3px);
+    background: linear-gradient(90deg, rgba(37,99,235,0.08), rgba(124,58,237,0.06));
+    transition: transform 180ms ease, background 220ms ease;
+  }
+
+  /* subtle moving gradient accent behind hero */
+  .page-shell::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: -120px;
+    width: 720px;
+    height: 360px;
+    transform: translateX(-50%);
+    background: radial-gradient(closest-side, rgba(37,99,235,0.06), transparent 60%);
+    filter: blur(36px);
+    pointer-events: none;
+    animation: floatY 8s ease-in-out infinite;
+    z-index: 0;
+  }
+
+  /* Ensure content sits above decorative pseudo element */
+  .page-shell > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Crab animation element (walk along top edge) */
+  .crab {
+    position: fixed;
+    top: 12px;
+    left: -160px;
+    font-size: 48px;
+    z-index: 9999;
+    pointer-events: auto;
+    transform: translateX(0) translateY(0);
+    animation: crabWalkTop 14s linear infinite;
+    will-change: transform;
+    filter: drop-shadow(0 8px 12px rgba(16,24,40,0.12));
+  }
+
+  @keyframes crabWalkTop {
+    0% {
+      transform: translateX(0) translateY(0);
+      opacity: 1;
+    }
+    10% { transform: translateX(10vw) translateY(4px); }
+    30% { transform: translateX(35vw) translateY(0px); }
+    50% { transform: translateX(60vw) translateY(6px); }
+    70% { transform: translateX(80vw) translateY(2px); }
+    90% { transform: translateX(95vw) translateY(4px); }
+    100% { transform: translateX(calc(100vw + 180px)) translateY(0); opacity: 0; }
+  }
+
+  /* Edge decorations: subtle lines, dots, and corner accents */
+  .edge-decor {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 850;
+  }
+
+  .edge-decor .h-line {
+    position: absolute;
+    left: 6%;
+    right: 6%;
+    height: 1px;
+    top: 44px;
+    background: linear-gradient(90deg, transparent, rgba(16,24,40,0.06), transparent);
+    opacity: 0.95;
+    filter: blur(0.2px);
+  }
+
+  .edge-decor .v-line.left {
+    position: absolute;
+    top: 10%;
+    bottom: 10%;
+    left: 6%;
+    width: 1px;
+    background: linear-gradient(180deg, transparent, rgba(16,24,40,0.04), transparent);
+    opacity: 0.9;
+  }
+
+  .edge-decor .v-line.right {
+    position: absolute;
+    top: 10%;
+    bottom: 10%;
+    right: 6%;
+    width: 1px;
+    background: linear-gradient(180deg, transparent, rgba(16,24,40,0.04), transparent);
+    opacity: 0.9;
+  }
+
+  .edge-decor .dot {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(16,24,40,0.05);
+    box-shadow: 0 2px 4px rgba(16,24,40,0.03);
+  }
+
+  .edge-decor .corner {
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    border: 1px solid rgba(16,24,40,0.06);
+    border-radius: 2px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+  }
+
+  .edge-decor .corner.top-left { left: 5.2%; top: 10px; border-right: none; border-bottom: none; }
+  .edge-decor .corner.top-right { right: 5.2%; top: 10px; border-left: none; border-bottom: none; }
+
+  /* hide decorations on small screens to avoid clutter */
+  @media (max-width: 720px) {
+    .edge-decor { display: none; }
+  }
+
+  /* UI/UX border micro-interactions */
+  .edge-decor .label-badge {
+    position: absolute;
+    top: 64px;
+    left: 6%;
+    background: rgba(16,24,40,0.03);
+    color: rgba(16,24,40,0.8);
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 13px;
+    letter-spacing: 0.2px;
+    border: 1px solid rgba(16,24,40,0.04);
+    backdrop-filter: blur(4px);
+    transition: transform 220ms ease, opacity 220ms ease;
+    transform-origin: left top;
+  }
+
+  .edge-decor .label-badge.right {
+    left: auto;
+    right: 6%;
+  }
+
+  .edge-decor .floating-panel {
+    position: absolute;
+    right: 6%;
+    top: 120px;
+    width: 200px;
+    padding: 12px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0));
+    border: 1px solid rgba(16,24,40,0.04);
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(16,24,40,0.04);
+    font-size: 13px;
+    color: rgba(16,24,40,0.85);
+    opacity: 0.95;
+    transform: translateY(0);
+    transition: transform 360ms cubic-bezier(.22,.9,.22,1), opacity 240ms ease;
+  }
+
+  .edge-decor .floating-panel .row { display:flex; gap:8px; align-items:center; margin-bottom:8px }
+  .edge-decor .floating-panel .dot-mini { width:8px; height:8px; border-radius:50%; background:rgba(16,24,40,0.06) }
+
+  .edge-decor .svg-pattern { position:absolute; top:18px; right:18px; opacity:0.06 }
+
+  /* subtle hover trigger: when user moves near top, badges pop */
+  .page-shell:hover .edge-decor .label-badge,
+  .page-shell:focus-within .edge-decor .label-badge {
+    transform: translateY(-6px) scale(1.02);
+    opacity: 1;
+  }
+
+  /* micro pulse for left vertical gutter */
+  .edge-decor .v-line.left::after {
+    content: '';
+    position: absolute;
+    left: -6px;
+    top: 0;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(16,24,40,0.02);
+    animation: pulse 3.6s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0% { transform: scale(0.9); opacity: 0.12 }
+    50% { transform: scale(1.2); opacity: 0.22 }
+    100% { transform: scale(0.9); opacity: 0.12 }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .crab, .edge-decor .v-line.left::after, .edge-decor .label-badge, .edge-decor .floating-panel { animation: none; transition: none }
+  }
+
+  /* Quick hide for edge decorations when user wants them removed */
+  .edge-decor { display: none !important; }
 
   @media (max-width: 900px) {
     .hero,
