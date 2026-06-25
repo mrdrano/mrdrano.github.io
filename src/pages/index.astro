@@ -882,7 +882,7 @@ import Layout from '../layouts/Layout.astro';
 
   @media (max-width: 640px) {
     .page-shell {
-      width: min(100% - 24px, 100%);
+      width: min(100%, calc(100% - 24px));
       padding: 72px 0 48px;
     }
 
@@ -893,10 +893,40 @@ import Layout from '../layouts/Layout.astro';
 
     .hero {
       padding: 24px 0;
+      gap: 24px;
+    }
+
+    .hero-actions {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .hero-actions a {
+      width: 100%;
+      text-align: center;
+    }
+
+    .profile-photo-wrap {
+      margin-left: 0;
+      max-width: 100%;
+    }
+
+    .contact-links {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .contact-links a {
+      width: 100%;
+      text-align: center;
+    }
+
+    .section-header h2 {
+      font-size: 1.5rem;
     }
 
     h1 {
-      font-size: 2.8rem;
+      font-size: 2.4rem;
     }
   }
 </style>
